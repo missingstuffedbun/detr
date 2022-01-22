@@ -149,8 +149,8 @@ def build(image_set, args):
     assert root.exists(), f'provided Ship path {root} does not exist'
     mode = 'instances'
     PATHS = {
-        "train": (root / "input/train/train", root / f'working/custom_train.json'),
-        "val": (root / "input/val/val", root / f'working/custom_val.json'),
+        "train": (root / "input/sarship/train/train", root / f'working/custom_train.json'),
+        "val": (root / "input/sarship/val/val", root / f'working/custom_val.json'),
     }
 
     img_folder, ann_file = PATHS[image_set]
