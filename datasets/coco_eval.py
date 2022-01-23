@@ -45,7 +45,10 @@ class CocoEvaluator(object):
                 with contextlib.redirect_stdout(devnull):
                     coco_dt = COCO.loadRes(self.coco_gt, results) if results else COCO()
             coco_eval = self.coco_eval[iou_type]
-
+            
+            # Fix Numpy float2int
+            coco_eval.params.iouThrs = [0.5 , 0.55, 0.6 , 0.65, 0.7 , 0.75, 0.8 , 0.85, 0.9 , 0.95]
+            
             coco_eval.cocoDt = coco_dt
             coco_eval.params.imgIds = list(img_ids)
             img_ids, eval_imgs = evaluate(coco_eval)
