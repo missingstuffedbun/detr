@@ -46,18 +46,18 @@ from object_detection.utils import label_map_util
 
 
 flags = tf.compat.v1.app.flags
-tf.flags.DEFINE_boolean('include_masks', False,
+tf.compat.v1.flags.DEFINE_boolean('include_masks', False,
                         'Whether to include instance segmentations masks '
                         '(PNG encoded) in the result. default: False.')
-tf.flags.DEFINE_string('train_image_dir', '',
+tf.compat.v1.flags.DEFINE_string('train_image_dir', '',
                        'Training image directory.')
-tf.flags.DEFINE_string('test_image_dir', '',
+tf.compat.v1.flags.DEFINE_string('test_image_dir', '',
                        'Test image directory.')
-tf.flags.DEFINE_string('train_annotations_file', '',
+tf.compat.v1.flags.DEFINE_string('train_annotations_file', '',
                        'Training annotations JSON file.')
-tf.flags.DEFINE_string('test_annotations_file', '',
+tf.compat.v1.flags.DEFINE_string('test_annotations_file', '',
                        'Test-dev annotations JSON file.')
-tf.flags.DEFINE_string('output_dir', '/tmp/', 'Output data directory.')
+tf.compat.v1.flags.DEFINE_string('output_dir', '/tmp/', 'Output data directory.')
 
 FLAGS = flags.FLAGS
 
