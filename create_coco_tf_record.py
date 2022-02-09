@@ -45,7 +45,7 @@ from object_detection.utils import dataset_util
 from object_detection.utils import label_map_util
 
 
-flags = tf.app.flags
+flags = tf.compat.v1.app.flags
 tf.flags.DEFINE_boolean('include_masks', False,
                         'Whether to include instance segmentations masks '
                         '(PNG encoded) in the result. default: False.')
