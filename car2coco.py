@@ -37,7 +37,6 @@ def create_annos(dirs, tag='train'):
         os.chdir(os.path.join(SOURCE_PATH,d,"Txt"))
         dfs = []
         for f in txts:
-            print(f)
             if os.path.getsize(os.path.join(SOURCE_PATH,d,"Txt",f))==0:
                 continue
             _df = pd.read_csv(f, header=None, sep=' ', error_bad_lines=False, engine='python')
