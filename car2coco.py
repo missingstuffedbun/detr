@@ -4,8 +4,8 @@ import pandas as pd
 import json
 
 
-SOURCE_PATH = "D:\\toUser_第二批V2\\给选手数据\\Data(新增训练数据)"
-DEST_PATH = "D:\\Car"
+SOURCE_PATH = "/content/给选手数据/Data(新增训练数据)"
+DEST_PATH = "/content/"
 os.chdir(DEST_PATH)
 random.seed(10)
 
@@ -71,7 +71,9 @@ def create_annos(dirs, tag='train'):
 
 if __name__ == '__main__':
     groups = [d for d in os.listdir(SOURCE_PATH)]
-    test_d = random.choices(groups, k=3)
-    train_d = [d for d in groups if d not in test_d]
-    # create_annos(test_d, 'test')
+    random.shuffle(groups)
+    test_d, val_d, train_d = groups[:2], groups[2:4], groups[4:]
+    print(test_d, val_d, train_d)
+    create_annos(test_d, 'test')
+    create_annos(val_d, 'val')
     create_annos(train_d, 'train')
