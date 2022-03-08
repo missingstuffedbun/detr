@@ -38,9 +38,9 @@ def create_annos(dirs, tag='train'):
         dfs = []
         for f in txts:
             print(f)
-            _df = pd.read_csv(f, header=None, sep=' ', error_bad_lines=False, engine='python')
-            if len(_df) < 1:
+            if os.path.getsize(os.path.join(SOURCE_PATH,d,"Txt",f))==0:
                 continue
+            _df = pd.read_csv(f, header=None, sep=' ', error_bad_lines=False, engine='python')
             _df.columns = TXT_COL
             _df['file_name'] = f
             dfs.append(_df)
