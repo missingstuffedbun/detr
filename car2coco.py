@@ -5,7 +5,7 @@ import json
 
 
 SOURCE_PATH = "/content/给选手数据/Data(新增训练数据)"
-DEST_PATH = "/content/"
+DEST_PATH = "/content/working"
 os.chdir(DEST_PATH)
 random.seed(10)
 
