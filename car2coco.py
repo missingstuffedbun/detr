@@ -29,6 +29,8 @@ TXT_COL = [
 
 def create_annos(dirs, tag='train'):
     for d in dirs:
+        if not os.path.isdir(os.path.join(SOURCE_PATH,d,"Txt")):
+            continue
         for f in os.listdir(os.path.join(SOURCE_PATH,d,"Image")):
             os.rename(os.path.join(SOURCE_PATH,d,"Image",f), os.path.join(DEST_PATH,tag,f))
         txts = [f for f in os.listdir(os.path.join(SOURCE_PATH,d,"Txt"))]
