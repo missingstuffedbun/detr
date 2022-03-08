@@ -319,6 +319,8 @@ def build(args):
 
     if args.dataset_file == "ship":
         num_classes = 1
+    if args.dataset_file == "car":
+        num_classes = 12
 
     device = torch.device(args.device)
 
