@@ -23,7 +23,7 @@ def build_dataset(image_set, args):
     if args.dataset_file == 'ship':
         return build_ship(image_set, args)
     if args.dataset_file == 'car':
-        return build_ship(image_set, args)
+        return build_car(image_set, args)
     if args.dataset_file == 'coco_panoptic':
         # to avoid making panopticapi required for coco
         from .coco_panoptic import build as build_coco_panoptic
