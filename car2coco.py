@@ -69,7 +69,7 @@ def create_annos(dirs, tag='train'):
         img_df.rename(columns={'image_id':'id'}, inplace = True)
         img_df.drop_duplicates(inplace=True)
         annos["images"] = img_df.to_dict('records')
-        annos["categories"] = [{"id":key, "name":value} for key, value in dict.items ()]
+        annos["categories"] = [{"id":key, "name":value} for key, value in CLASSES.items ()]
         with open(os.path.join(DEST_PATH, "custom_{}.json".format(tag)), "w") as outfile:
             json.dump(annos, outfile)
 
