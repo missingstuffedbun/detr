@@ -9,12 +9,12 @@ DEST_PATH = "/content/working"
 os.chdir(DEST_PATH)
 random.seed(10)
 
+HEIGHT, WIDTH = 1080, 1920  
 CLASSES = dict(zip(
     ["stone", "truck", "car", "cone", "lamp", "scraper",
      "bulldozer", "sprinkler", "shovel", "Person", "drill", "excavator"],
     range(1,13)
 ))
-
 TXT_COL = [
     'type',             # 目标类型，分别是stone，truck，car，cone，lamp，scraper，bulldozer，sprinkler，shovel，Person，drill，excavator
     'truncated',        # 物体被截断程度，由（0 1 ）表示
@@ -61,6 +61,8 @@ def create_annos(dirs, tag='train'):
         df['poly'] = df[['poly1','poly2','poly3','poly4']].to_numpy().tolist()
         df['segmentation'] = df['poly'].apply(lambda x: list(x))
         df['area'] = df['bbox_width'] * df['bbox_height']
+        df['height'] = HEIGHT
+        df['width'] = WIDTH
         annos = {}
         annos["annotations"] = df[["id","image_id","category_id","segmentation","area","bbox","iscrowd"]].to_dict('records')
         img_df = df[['file_name','height','width','image_id']]
@@ -74,7 +76,6 @@ if __name__ == '__main__':
     groups = [d for d in os.listdir(SOURCE_PATH)]
     random.shuffle(groups)
     test_d, val_d, train_d = groups[:2], groups[2:4], groups[4:]
-    print(test_d, val_d, train_d)
     create_annos(test_d, 'test')
     create_annos(val_d, 'val')
     create_annos(train_d, 'train')
