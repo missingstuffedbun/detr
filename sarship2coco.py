@@ -5,16 +5,14 @@ import json
 SIZE = 256
 DEST_PATH = "/content/working"
 
-def read_bbox(f):
-  return open(f,'r').readlines()
-
 def sarship_coco_label(t="train"):
   label_json = {}
-  file_names = [f for f in os.path.join(DEST_PATH,"labels",t) if f.endswith(".txt")]
+  file_names = [f for f in os.listdir(os.path.join(DEST_PATH,"labels",t)) if f.endswith(".txt")]
+  print(file_names)
   df = pd.DataFrame(file_names, columns=['file_name'])
   df["id"] = df.index
   df["image_id"] = df.index
-  df['bbox'] = df['file_name'].apply(read_bbox)
+  df['bbox'] = df['file_name'].apply(lambda x: open(os.path.join(DEST_PATH,"labels",t,x),'r').readlines())
   df['file_name'] = df['file_name'].str.replace(".txt",".jpg")
   df['height'] = SIZE
   df['width'] = SIZE
@@ -23,7 +21,7 @@ def sarship_coco_label(t="train"):
   df = df.explode('bbox')
   df_annotations = df[['id','image_id','file_name','bbox']]
   df_annotations["id"] = df_annotations.index
-  df_annotations["category_id"] = 0
+  df_annotations["category_id"] = 1
   df_annotations["ignore"] = 0
   df_annotations["iscrowd"] = 0
   df_annotations["bbox"] = df_annotations["bbox"].str.replace('\n', '')
