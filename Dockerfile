@@ -5,6 +5,9 @@ MAINTAINER author "missingstuffedbun@hotmail.com"
 RUN pip install jupyterlab
 RUN jupyter lab --generate-config
 RUN python -c "from notebook.auth import passwd; print(\"c.NotebookApp.password = u'\" +  passwd('3582521') + \"'\")" >> ~/.jupyter/jupyter_lab_config.py
+RUN pip install --upgrade ipykernel
+RUN apt-get update && echo y | apt-get install zip
+
 ENV PORT=9005
 ENV NOTEBOOK_DIR=/workspace
 
