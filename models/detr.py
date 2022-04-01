@@ -317,6 +317,8 @@ def build(args):
     #     # max_obj_id + 1, but the exact value doesn't really matter
     #     num_classes = 250
 
+    if args.dataset_file == "coco":
+        num_classes = 91
     if args.dataset_file == "ship":
         num_classes = 1
     if args.dataset_file == "car":

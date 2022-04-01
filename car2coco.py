@@ -2,12 +2,15 @@ import os
 import random
 import pandas as pd
 import json
+import argparse
 
+# SOURCE DATA 
+# --groups
+# ----Txt
+# ------*.txt
+# ----Image
+# ------*.jpg
 
-SOURCE_PATH = "/content/给选手数据/Data(新增训练数据)"
-DEST_PATH = "/content/working"
-os.chdir(DEST_PATH)
-random.seed(10)
 
 HEIGHT, WIDTH = 1080, 1920  
 CLASSES = dict(zip(
@@ -73,10 +76,23 @@ def create_annos(dirs, tag='train'):
         with open(os.path.join(DEST_PATH, "custom_{}.json".format(tag)), "w") as outfile:
             json.dump(annos, outfile)
 
+
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-s","--source-path",help="Source dataset directory",required=True,type=str)
+    parser.add_argument("-d","--dest-path",help="Destination directory of cocoish data",required=True,type=str)
+    parser.add_argument("--seed",help="random seed",default=10,type=int)
+    args = parser.parse_args()
+
+    SOURCE_PATH, DEST_PATH = args.source_path, args.dest_path
+    random.seed(args.seed)
+    os.chdir(DEST_PATH)
+    
     groups = [d for d in os.listdir(SOURCE_PATH)]
     random.shuffle(groups)
     test_d, val_d, train_d = groups[:2], groups[2:4], groups[4:]
     create_annos(test_d, 'test')
     create_annos(val_d, 'val')
     create_annos(train_d, 'train')
+    
+    
